@@ -1,0 +1,39 @@
+.cardProfileDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 2px; 
+}
+
+.name {
+  font-size: 16px;
+  font-weight: 600;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, sans-serif;
+  color: #000;
+}
+.role {
+  font-size: 12px;            /* LinkedIn mobile */
+  color: #6b7280;
+
+  max-width: 220px;           /* controls how much text shows */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.time {
+  font-size: 11px;            /* LinkedIn mobile */
+  color: #9ca3af;
+}
+
+/* Tablet & Desktop */
+@media (min-width: 640px) {
+  .role {
+    font-size: 14px;          /* LinkedIn desktop */
+    max-width: 420px;
+  }
+
+  .time {
+    font-size: 12px;
+  }
+}

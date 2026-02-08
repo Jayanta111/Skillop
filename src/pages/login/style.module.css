@@ -1,0 +1,169 @@
+/* GLOBAL CONTAINER */
+.container {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  background: snow;
+  padding: 1rem;
+}
+
+.cardContainer {
+  height: 80vh;
+  display: flex;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 80vw;
+  background: white;
+  box-shadow: 10px 10px 15px rgb(173, 173, 173);
+}
+
+/* LEFT SIDE (FORM) */
+.cardContainer_left {
+  flex: 0.6;
+  padding: 2.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cardLeft_heading {
+  color: rgb(62, 65, 68);
+  font-weight: bold;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+/* FORM FIELDS */
+.input_Container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 400px;
+  margin: 0 auto;
+  gap: 1.2rem;
+  width: 100%;
+}
+
+.inputRow {
+  width: 100%;
+  display: flex;
+  gap: 1.2rem;
+}
+
+.input_field {
+  border: 1px solid #ccc;
+  padding: 0.8rem 1.3rem;
+  outline: none;
+  border-radius: 10px;
+  width: 100%;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.input_field:focus {
+  border-color: #2563eb;
+}
+
+.submitBtn {
+  width: 60%;
+  height: 45px;
+  margin-top: 1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background-color: #2563eb;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: background 0.3s;
+}
+
+.submitBtn:hover {
+  background-color: #1d4ed8;
+}
+
+.disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}
+
+.toggleText {
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.toggleText span {
+  color: #2563eb;
+  font-weight: 600;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+/* RIGHT SIDE (IMAGE) */
+.cardContainer_right {
+  flex: 0.4;
+  /* background: linear-gradient(135deg, #4f46e5, #6366f1); */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.sideImage {
+  width: 100%;
+  max-width: 350px;
+  object-fit: contain;
+  transition: transform 0.5s ease;
+}
+
+.cardContainer_right:hover .sideImage {
+  transform: scale(1.08);
+}
+
+/* 📱 MOBILE RESPONSIVE */
+@media (max-width: 768px) {
+  .container {
+    height: auto;
+    margin-top: 50px;
+    padding: 10px;
+  }
+
+  .cardContainer {
+    flex-direction: column; /* Stack vertically */
+    width: 100%;
+    height: auto; /* Let content dictate height */
+    min-height: 90vh;
+  }
+
+  /* Moves image to the TOP */
+  .cardContainer_right {
+    order: -1; 
+    flex: none;
+    height: 150px; /* Fixed height for the top banner */
+    width: 100%;
+    padding: 1rem;
+    margin-top:3.4rem;
+  }
+
+  .sideImage {
+    max-width: 150px;
+  }
+
+  .cardContainer_left {
+    padding: 2rem 1.2rem;
+    flex: none;
+  }
+
+  .inputRow {
+    flex-direction: column; /* Stacks first/last name inputs */
+    gap: 1.2rem;
+  }
+
+  .submitBtn {
+    width: 100%; /* Easier to tap on mobile */
+  }
+}

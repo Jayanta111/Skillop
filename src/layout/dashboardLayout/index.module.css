@@ -1,0 +1,264 @@
+/* ===== Home Layout ===== */
+.homeContainer {
+    display: flex;
+    width: 100%;
+}
+
+.homeContainer>div:nth-child(odd) {
+    flex: 0.2;
+}
+
+.homeContainer>div:nth-child(even) {
+    flex: 0.6;
+}
+
+/* ===== Left Sidebar ===== */
+.homeContainer_leftBar {
+    display: inline-flex;          /* key change */
+    flex-direction: column;
+    align-self: flex-start;        /* prevent stretch */
+
+    margin-top: 20px;
+    margin-left: 20px;
+
+    background: #d7d5d5;
+    border-radius: 0.5rem;
+    border-bottom: 2px solid #e5e7eb;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+
+    padding: 8px 0;               /* cleaner spacing */
+}
+
+
+/* ===== Sidebar Button ===== */
+.sideBarOption {
+    gap: 1rem;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 12px 16px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 0.2s ease, color 0.2s ease;
+    
+}
+
+/* Hover → light color */
+.sideBarOption:hover {
+    background: rgba(37, 101, 238, 0.15);
+    transform: scale(1.01);
+}
+
+.sideBarOption.active {
+    background: #2563eb;
+    color: #ffffff;
+}
+
+.sideBarOption.active svg {
+    color: #ffffff;
+}
+
+
+/* ===== Mobile Bottom Navigation ===== */
+@media (max-width: 768px) {
+
+  .homeContainer {
+    flex-direction: column;
+  }
+
+  /* Sidebar moves to bottom */
+  .homeContainer_leftBar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+
+    margin: 0;
+    border-radius: 0;
+    border-top: 1px solid #e5e7eb;
+    border-bottom: none;
+
+    background: #d7d5d5;
+    z-index: 1000;
+  }
+
+  /* Each button */
+  .sideBarOption {
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+
+    padding: 10px 0;
+    width: 100%;
+  }
+
+  /* Text smaller on mobile */
+  .sideBarOption p {
+    font-size: 12px;
+  }
+
+  /* Feed needs space so it doesn't hide behind bottom bar */
+  .homeContainer_feedContainer {
+    padding-bottom: 70px;
+  }
+
+  /* Hide right empty container on mobile */
+  .homeContainer_extraContainer {
+    display: none;
+  }
+}
+/* ===== Feed Container Design (NO layout change) ===== */
+.homeContainer_feedContainer {
+  margin-top: 20px;
+  padding: 20px;
+
+  background: #ffffff;
+  border-radius: 0.75rem;
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  min-height: calc(100vh - 100px);
+}
+
+/* Text inside feed */
+.homeContainer_feedContainer p {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #1f2937;
+}
+
+/* Headings */
+.homeContainer_feedContainer h1,
+.homeContainer_feedContainer h2,
+.homeContainer_feedContainer h3 {
+  color: #111827;
+  margin-bottom: 12px;
+}
+
+.homeContainer_feedContainer .card {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+/* Buttons inside feed */
+.homeContainer_feedContainer button {
+  background: #2563eb;
+  color: #ffffff;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.homeContainer_feedContainer button:hover {
+  background: #1d4ed8;
+}
+
+/* Mobile safety (bottom bar space) */
+@media (max-width: 768px) {
+  .homeContainer_feedContainer {
+    padding-bottom: 80px;
+  }
+}
+/* ===== Activity Section ===== */
+.activitySection {
+  margin-top: 20px;
+  padding: 12px;
+  border-top: 2px solid #e0dcdc;
+}
+
+.activityTitle {
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+/* Activity rows */
+.activity {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 8px 4px;
+  font-size: 14px;
+  color: #444;
+}
+
+@media (max-width: 768px) {
+  .activitySection {
+ 
+    display: none;
+  }
+}
+.homeContainer_extraContainer {
+    margin-left: 5px;
+    margin-right: 15px;
+ margin-top: 20px;
+  padding: 20px;
+
+  background: #ffffff;
+  border-radius: 0.75rem;
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  min-height: calc(100vh - 100px);
+}
+
+/* Title */
+.topProfilesTitle {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 14px;
+  color: #111827;
+}
+/* Profile Card */
+.topProfileCard {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 6px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.topProfileCard:hover {
+  background-color: #f3f6f8;
+}
+
+/* Profile Image */
+.profileAvatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #ddd;
+}
+
+/* Text Section */
+.topProfileCard div {
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #000000e6;
+  line-height: 1.2;
+}
+
+.username {
+  font-size: 13px;
+  color: #666666;
+}
+
+/* Divider like LinkedIn */
+.topProfileCard:not(:last-child) {
+  border-bottom: 1px solid #e6e6e6;
+}
