@@ -1,0 +1,329 @@
+.container {
+    padding: 1.5rem;
+    background: rgb(247, 246, 246);
+    min-height: 100vh;
+}
+
+
+/* ================= BACKDROP ================= */
+
+.backDropContainer {
+    width: 100%;
+    height: 260px;
+    background: url("https://images.pexels.com/photos/247421/pexels-photo-247421.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    border-radius: 20px;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 60px;
+}
+
+
+/* ================= PROFILE IMAGE ================= */
+
+.profileImage {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 50%;
+    position: absolute;
+    bottom: -70px;
+    left: 40px;
+    border: 5px solid white;
+    background: white;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+
+/* ================= PROFILE CARD ================= */
+
+.profileCard {
+    padding-top: 6.5rem;
+    background: white;
+    margin-top: 80px;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+
+/* ================= PROFILE HEADER ================= */
+
+.profileHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+
+/* ================= PROFILE TEXT ================= */
+
+.profileName {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #111;
+}
+
+.profileUsername {
+    font-size: 1rem;
+    color: #666;
+    margin-top: 4px;
+}
+
+.bio {
+    margin-top: 8px;
+    color: #444;
+    font-size: 0.95rem;
+}
+
+
+/* ================= CONNECT BUTTON ================= */
+
+.connectBtn {
+    background: #0a66c2;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+.connectBtn:hover {
+    background: #004182;
+}
+
+.connectedBtn {
+    background: #e4e6eb;
+    color: #333;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+}
+
+
+/* ================= MAIN LAYOUT ================= */
+
+.mainLayout {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+    align-items: flex-start;
+}
+
+.leftSection {
+    flex: 2;
+}
+
+.rightSection {
+    flex: 1;
+}
+
+
+/* ================= SIDEBAR ================= */
+
+.sidebarCard {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.sidebarPost {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.sidebarPost:last-child {
+    border-bottom: none;
+}
+
+.sidebarPostText {
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.sidebarDate {
+    font-size: 0.75rem;
+    color: gray;
+}
+
+
+/* ================= POST SECTION ================= */
+
+.postContainer {
+    margin-top: 20px;
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.sectionTitle {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+
+/* ================= EXPERIENCE / EDUCATION ================= */
+
+.expCard {
+    border-left: 3px solid #0a66c2;
+    padding-left: 12px;
+    margin-bottom: 12px;
+}
+
+.expCard h4 {
+    font-size: 1rem;
+    margin: 0;
+}
+
+.expCard p {
+    font-size: 0.9rem;
+    color: #444;
+    margin: 2px 0;
+}
+
+.expCard span {
+    font-size: 0.8rem;
+    color: gray;
+}
+
+
+/* ================= POST CARD ================= */
+
+.postCard {
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #eee;
+    margin-bottom: 15px;
+    transition: 0.2s;
+}
+
+.postCard:hover {
+    background: #f9fafb;
+}
+
+
+/* ================= POST HEADER ================= */
+
+.postHeader {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.postProfileImg {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.postDate {
+    font-size: 0.8rem;
+    color: gray;
+}
+
+
+/* ================= POST CONTENT ================= */
+
+.postContent {
+    margin-top: 10px;
+    font-size: 0.95rem;
+    color: #333;
+    line-height: 1.4;
+}
+
+
+
+/* ================= TABLET ================= */
+
+@media (max-width: 1024px) {
+
+    .container {
+        padding: 1rem;
+    }
+
+    .mainLayout {
+        gap: 15px;
+    }
+
+}
+
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 768px) {
+
+    .mainLayout {
+        flex-direction: column;
+    }
+
+    .rightSection {
+        width: 100%;
+    }
+
+    .backDropContainer {
+        height: 180px;
+        border-radius: 15px;
+    }
+
+    .profileImage {
+        width: 100px;
+        height: 100px;
+        bottom: -50px;
+        left: 20px;
+    }
+
+    .profileCard {
+        margin-top: 60px;
+        padding-top: 5rem;
+    }
+
+    .profileHeader {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .connectBtn,
+    .connectedBtn {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+}
+
+
+
+/* ================= SMALL MOBILE ================= */
+
+@media (max-width: 480px) {
+
+    .backDropContainer {
+        height: 150px;
+    }
+
+    .profileImage {
+        width: 85px;
+        height: 85px;
+        bottom: -40px;
+        left: 15px;
+    }
+
+    .profileName {
+        font-size: 1.2rem;
+    }
+
+    .sectionTitle {
+        font-size: 1rem;
+    }
+
+}

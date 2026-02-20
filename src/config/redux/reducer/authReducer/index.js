@@ -3,8 +3,11 @@ import {
   getAboutUser,
   getAllUsers,
   loginHandler,
+  registerUser,
+  getMyConnectionRequests,
+  getMyConnections,
+  acceptConnection,
 } from "../../action/authAction";
-import { registerUser } from "../../action/authAction";
 
 const initialState = {
   user: null,
@@ -16,9 +19,10 @@ const initialState = {
   isTokenThere: false,
   profileFetched: false,
   connections: [],
-  connectionRequest: [],
-  all_users:[],
-  all_profiles_fetched:false
+  incomingRequests: [],
+  sentRequests: [],
+  all_users: [],
+  all_profiles_fetched: false,
 };
 
 const authSlice = createSlice({
@@ -30,26 +34,28 @@ const authSlice = createSlice({
     handleLoginUser: (state) => {
       state.message = "Hello Welcome";
     },
+
     emptyMessage: (state) => {
       state.message = "";
     },
+
     setTokenThere: (state) => {
       state.isTokenThere = true;
     },
+
     setTokenIsNotThere: (state) => {
       state.isTokenThere = false;
     },
   },
+
   extraReducers: (builder) => {
     builder
-      // LOGIN PENDING
+
       .addCase(loginHandler.pending, (state) => {
         state.isLoading = true;
         state.isError = false;
         state.message = "";
       })
-
-      // LOGIN SUCCESS
       .addCase(loginHandler.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
@@ -57,8 +63,6 @@ const authSlice = createSlice({
         state.user = action.payload;
         state.message = "Login successful";
       })
-
-      //  LOGIN FAILED
       .addCase(loginHandler.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
@@ -76,7 +80,7 @@ const authSlice = createSlice({
         state.isSuccess = true;
         state.loggedIn = true;
         state.user = action.payload;
-        state.message = "register  successful ,Please Login ";
+        state.message = "Register successful, Please Login";
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.isLoading = false;
@@ -84,17 +88,53 @@ const authSlice = createSlice({
         state.loggedIn = false;
         state.message = action.payload?.message || "Register failed";
       })
+
       .addCase(getAboutUser.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isError = false;
         state.profileFetched = true;
         state.user = action.payload;
       })
+
       .addCase(getAllUsers.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isError = false;
-        state.all_profiles_fetched=true;
-        state.all_users=action.payload.profiles
+        state.all_profiles_fetched = true;
+        state.all_users = action.payload.profiles;
+      })
+
+      .addCase(getMyConnections.fulfilled, (state, action) => {
+        const {
+          incomingRequests = [],
+          sentRequests = [],
+          connections = [],
+        } = action.payload;
+
+        state.incomingRequests = incomingRequests;
+        state.sentRequests = sentRequests;
+        state.connections = connections;
+      })
+
+      .addCase(getMyConnections.rejected, (state, action) => {
+        state.message = action.payload;
+      })
+
+      .addCase(getMyConnectionRequests.fulfilled, (state, action) => {
+        state.connectionRequest = action.payload;
+      })
+      .addCase(getMyConnectionRequests.rejected, (state, action) => {
+        state.message = action.payload;
+      })
+      .addCase(acceptConnection.fulfilled, (state, action) => {
+        const { requestId, accept_type } = action.payload;
+
+        state.connectionRequest = state.connectionRequest.map((req) =>
+          req._id === requestId
+            ? { ...req, status_accepted: accept_type === "accept" }
+            : req,
+        );
+      })
+
+      .addCase(acceptConnection.rejected, (state, action) => {
+        state.message = action.payload;
       });
   },
 });
@@ -106,4 +146,5 @@ export const {
   setTokenThere,
   setTokenIsNotThere,
 } = authSlice.actions;
+
 export default authSlice.reducer;

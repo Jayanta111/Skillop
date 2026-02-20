@@ -1,0 +1,42 @@
+/*  */
+.topProfileCard {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 6px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+    box-shadow: 10px 10px 10px 0px rgba(0, 0, 0, 0.08);
+
+}
+.profileAvatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #ddd;
+  padding: 5px;
+  
+}
+
+.topProfileCard div {
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #000000e6;
+  line-height: 1.2;
+}
+
+.username {
+  font-size: 13px;
+  color: #666666;
+}
+
+.topProfileCard:not(:last-child) {
+  border-bottom: 1px solid #e6e6e6;
+}

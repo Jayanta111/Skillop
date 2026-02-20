@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setTokenThere } from "@/config/redux/reducer/authReducer";
 import { getAboutUser, getAllUsers } from "@/config/redux/action/authAction";
-import BaseUrl from "@/config/index"
+import { BASE_URL } from "@/config";
 function DashboardLayout({ children }) {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -110,7 +110,6 @@ function DashboardLayout({ children }) {
             </svg>
             <p>Projects</p>
           </div>
-          {/* ===== Activity Section ===== */}
           <div className={styles.activitySection}>
             <p className={styles.activityTitle}>Your Activity</p>
 
@@ -139,7 +138,10 @@ function DashboardLayout({ children }) {
             <div key={profile._id} className={styles.topProfileCard}>
               <img
               className={styles.profileAvatar}
-                src={`http://localhost:8085/uploads/${profile.userId.profilePicture}`}
+               src={`${BASE_URL}/uploads/${
+                                  authState?.user?.userId?.profilePicture || "default.jpg"
+                                }`}
+                // src={`http://localhost:8085/uploads/${profile.userId.profilePicture}`}
                 alt={profile.userId.name}
                 onError={(e) => {
                   e.currentTarget.src =
