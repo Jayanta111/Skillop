@@ -10,7 +10,6 @@ function DashboardLayout({ children }) {
   const router = useRouter();
   const dispatch = useDispatch();
   const authState = useSelector((state) => state.auth);
-
   // Auth check
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -134,24 +133,31 @@ function DashboardLayout({ children }) {
         <div className={styles.homeContainer_extraContainer}>
           <h3 className={styles.topProfilesTitle}>Top Profiles</h3>
 
-          {authState.all_users.map((profile) => (
-            <div key={profile._id} className={styles.topProfileCard}>
+          {authState?.all_users?.map((profile) => (
+            <div
+              key={profile._id}
+              className={styles.topProfileCard}
+              onClick={() =>
+                router.push(`/viewProfile/${profile?.userId?.username}`)
+              }
+              style={{ cursor: "pointer" }}
+            >
               <img
-              className={styles.profileAvatar}
-               src={`${BASE_URL}/uploads/${
-                                  authState?.user?.userId?.profilePicture || "default.jpg"
-                                }`}
-                // src={`http://localhost:8085/uploads/${profile.userId.profilePicture}`}
-                alt={profile.userId.name}
+                className={styles.profileAvatar}
+                src={
+                  profile?.userId?.profilePicture
+                    ? `${BASE_URL}/uploads/${profile.userId.profilePicture}`
+                    : `${BASE_URL}/uploads/default.jpg`
+                }
+                alt={profile?.userId?.name || "profile"}
                 onError={(e) => {
-                  e.currentTarget.src =
-                    "https://sociallybackend12.vercel.app/uploads/default.jpg";
+                  e.currentTarget.src = `${BASE_URL}/uploads/default.jpg`;
                 }}
               />
 
               <div>
-                <p className={styles.name}>{profile.userId.name}</p>
-                <p className={styles.username}>@{profile.userId.username}</p>
+                <p className={styles.name}>{profile?.userId?.name}</p>
+                <p className={styles.username}>@{profile?.userId?.username}</p>
               </div>
             </div>
           ))}
