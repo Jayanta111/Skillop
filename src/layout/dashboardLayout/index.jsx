@@ -145,7 +145,7 @@ function DashboardLayout({ children }) {
                 alt={profile.userId.name}
                 onError={(e) => {
                   e.currentTarget.src =
-                    "http://localhost:8085/uploads/default.jpg";
+                    "https://sociallybackend12.vercel.app/uploads/default.jpg";
                 }}
               />
 

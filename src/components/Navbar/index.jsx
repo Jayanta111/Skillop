@@ -3,7 +3,7 @@ import { Home, User, Bell, MessageCircle, PlusSquare } from "lucide-react";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { reset } from "@/config/redux/reducer/authReducer";
-
+import { BASE_URL } from "@/config";
 function NavbarComp() {
   const router = useRouter();
   const authState = useSelector((state) => state.auth);
@@ -39,13 +39,13 @@ function NavbarComp() {
             </span>
 
             <img
-              src={`http://localhost:8085/uploads/${
+              src={`${BASE_URL}/uploads/${
                 profilePic || "default.jpg"
               }`}
               alt={userName}
               onError={(e) => {
                 e.currentTarget.src =
-                  "http://localhost:8085/uploads/default.jpg";
+                  "https://sociallybackend12.vercel.app/uploads/default.jpg";
               }}
               className="h-9 w-9 rounded-full border object-cover"
               onClick={() => router.push("/profile")}
@@ -92,13 +92,13 @@ function NavbarComp() {
               Hi, {userName?.split(" ")[0]}
             </span>
             <img
-              src={`http://localhost:8085/uploads/${
+              src={`${BASE_URL}/uploads/${
                 profilePic || "default.jpg"
               }`}
               alt={userName}
               onError={(e) => {
                 e.currentTarget.src =
-                  "http://localhost:8085/uploads/default.jpg";
+                    "https://sociallybackend12.vercel.app/uploads/default.jpg";
               }}
               className="h-9 w-9 rounded-full border object-cover"
               onClick={() => router.push("/profile")}
