@@ -9,8 +9,8 @@ import {
 import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { BASE_URL } from "@/config";
-import style from "@/pages/profile/index.module.css"
+import { BASE_URL, clientServer } from "@/config";
+import style from "@/pages/profile/index.module.css";
 export default function Profile() {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -47,7 +47,33 @@ export default function Profile() {
   const profilePosts = postState?.posts?.filter(
     (post) => post.userId?._id === loggedInUserId,
   );
+  const uploadProfilePicture = async (file) => {
+    try {
+      const token = localStorage.getItem("token");
 
+      const formData = new FormData();
+
+      // ✅ backend expects field name "file"
+      formData.append("file", file);
+
+      await clientServer.post("/update_profile_picture", formData, {
+        headers: {
+          Authorization: `Bearer ${token}`, // ✅ important
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      // refresh user data
+      dispatch(getAboutUser({ token }));
+
+      console.log("Profile picture uploaded successfully");
+    } catch (error) {
+      console.error(
+        "Profile picture upload failed:",
+        error?.response?.data || error.message,
+      );
+    }
+  };
   return (
     <UserLayout>
       <DashboardLayout>
@@ -55,20 +81,38 @@ export default function Profile() {
           <div className=" min-h-screen">
             <div className="bg-white shadow-sm">
               {/* Cover */}
-              <div className={style.backDropContainer}>
-
-              </div>
+              <div className={style.backDropContainer}></div>
 
               {/* Profile Info */}
               <div className="max-w-5xl mx-auto px-6 relative">
                 {/* Profile Image */}
-                <img
-                  src={`${BASE_URL}/uploads/${
-                    authState?.user?.userId?.profilePicture || "default.jpg"
-                  }`}
-                  className="h-36 w-36 rounded-full border-4 border-white object-cover absolute -top-16"
-                  alt="profile"
-                />
+                <div className="relative">
+                  {/* Hidden File Input */}
+                  <input
+                    type="file"
+                    accept="image/*"
+                    id="profilePictureUpload" 
+                    className="hidden"
+                    onChange={(e) => {
+                      if (e.target.files?.[0]) {
+                        uploadProfilePicture(e.target.files[0]);
+                      }
+                    }}
+                  />
+
+                  <label
+                    htmlFor="profilePictureUpload"
+                    className="cursor-pointer items-center"
+                  >
+                    <img
+                      src={`${BASE_URL}/uploads/${
+                        authState?.user?.userId?.profilePicture || "default.jpg"
+                      }`}
+                      className="h-36 w-36 rounded-full border-4 border-white object-cover absolute -top-16 hover:opacity-80 transition"
+                      alt="profile"
+                    />
+                  </label>
+                </div>
 
                 {/* User Details */}
                 <div className="pt-24 pb-6 flex flex-col sm:flex-row justify-between">
